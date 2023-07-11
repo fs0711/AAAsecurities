@@ -18,7 +18,7 @@ const authReducer = (state = initState, action) => {
       };
 
     case 'LOGIN_SUCCESS':
-      console.log(action.payload)
+      // console.log(action.payload)
       localStorage.setItem('token', action.payload.access_token);
       localStorage.setItem('expirationTime', action.payload.expiry_time)
       return {
@@ -30,6 +30,7 @@ const authReducer = (state = initState, action) => {
         status: action.payload.status,
         user: action.payload.user
       };
+
       case 'LOGOUT_USER':
         localStorage.removeItem('token');
         // localStorage.removeItem('expirationTime');

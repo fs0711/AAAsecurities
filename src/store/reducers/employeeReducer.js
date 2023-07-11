@@ -1,5 +1,5 @@
 const initState = {
-    users: [],
+    employees: [],
     isLoading: false,
   };
 
@@ -8,16 +8,16 @@ const initState = {
     let index = null;
   
     switch (action.type) {
-      case 'GET_USERS':
+      case 'GET_EMPLOYEES':
         return {
           ...state,
-          users: action.payload,
+          employees: action.payload,
           isLoading: false
         };
       case 'CREATE_USERS':
         return {
           ...state,
-         users: users.push(action.payload)
+          employees: employees.push(action.payload)
         };
         default:
             return {

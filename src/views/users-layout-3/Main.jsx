@@ -35,6 +35,7 @@ function Main() {
   useEffect(() => {
 
     dispatch(getAllUsers());
+    // console.log(users)
 
   }, []);
 
@@ -166,10 +167,6 @@ function Main() {
                   {user.email_address
                   }
                 </div>
-                <div className="flex items-center justify-center lg:justify-start text-slate-500 mt-1">
-                  <Lucide icon="CreditCard" className="w-3 h-3 mr-2" />
-                  {user.nic}
-                </div>
               </div>
               {/*<div className="text-center lg:text-right p-5 border-t border-slate-200/60 dark:border-darkmode-400">
                 <button className="btn btn-primary py-1 px-2 mr-2">
@@ -261,9 +258,9 @@ function Main() {
                           value={gender} onChange={handleGenderChange}
                           >
                           <option value="">Select Gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="other">Other</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
                           </select>
                         </div>
                         <div className="col-span-12 sm:col-span-6">
@@ -276,9 +273,10 @@ function Main() {
                           value={role} onChange={handleRoleChange}
                           >
                           <option value="">Select Role</option>
-                          <option value="1">Manager</option>
-                          <option value="2">User</option>
-                          <option value="3">Other</option>
+                          <option value={1}>Owner</option>
+                          <option value={2}>Manager</option>
+                          <option value={3}>Assistant Manager</option>
+                          <option value={4}>User</option>
                           </select>
                         </div>
                         <div className="col-span-12 sm:col-span-6">
@@ -289,7 +287,7 @@ function Main() {
                           id="phone"
                           type="text"
                           className="form-control"
-                          placeholder="03xxxxxxxxx"
+                          placeholder="+923xxxxxxxxx"
                           value={phoneNumber} onChange={handlePhoneNumberChange}
                         />
                         </div>

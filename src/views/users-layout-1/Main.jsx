@@ -20,23 +20,27 @@ import * as $_ from "lodash";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
-import { getAllUsers } from "../../store/actions";
-import { createUser } from "../../store/actions";
+import { getAllEmployees } from "../../store/actions";
+import { createEmployee } from "../../store/actions";
 
 function Main() {
 
 
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
+  const employees = useSelector((state) => state.employee.employees);
   const user = useSelector((state) => state.auth.user);
   const [headerFooterModalPreview, setHeaderFooterModalPreview] =
   useState(false);
- 
+  const [options, setOptions] = useState([]);
   useEffect(() => {
 
-    dispatch(getAllUsers());
+    dispatch(getAllEmployees());
 
+    setOptions(users);
   }, []);
+
+  
 
   const [employeeName, setEmployeeName] = useState("");
 const [designation, setDesignation] = useState("");
@@ -47,6 +51,53 @@ const [brpExpiry, setBrpExpiry] = useState("");
 const [siaLicence, setSiaLicence] = useState("");
 const [siaIssueDate, setSiaIssueDate] = useState("");
 const [siaExpiryDate, setSiaExpiryDate] = useState("");
+const [gender, setGender] = useState("");
+const [manager, setManager] = useState("");
+const [joiningDate, setJoiningDate] = useState(new Date());
+const [country, setCountry] = useState("");
+const [city, setCity] = useState("");
+const [allocatedLeaves, setAllocatedLeaves] = useState('');
+const [consumedLeaves, setConsumedLeaves] = useState('');
+const [probationPeriod, setProbationPeriod] = useState('');
+const [password, setPassword] = useState('');
+const [email, setEmail] = useState('');
+
+const handleManagerChange = (event) => {
+  setManager(event.target.value);
+};
+
+const handleGenderChange = (event) => {
+  setGender(event.target.value)
+}
+
+const resetForm = () => {
+  setEmployeeName("");
+  setDesignation("");
+  setAddress("");
+  setPostCode("");
+  setMobileNum("");
+  setBrpExpiry("");
+  setSiaLicence("");
+  setSiaIssueDate("");
+  setSiaExpiryDate("");
+  setGender("");
+  setManager("");
+  setJoiningDate(new Date());
+  setCountry("");
+  setCity("");
+  setAllocatedLeaves("");
+  setConsumedLeaves("");
+  setProbationPeriod("");
+  setPassword("");
+  setEmail("");
+};
+
+const handleClick = () => {
+  e.preventDefault();
+  dispatch(createEmployee(employeeName, email, password, allocatedLeaves, consumedLeaves, probationPeriod, gender, joiningDate, country, city, address, postCode, mobileNum,brpExpiry,siaLicence,siaIssueDate,siaExpiryDate, manager, user.id ));
+
+  resetForm();
+}
 
   return (
     <>
@@ -75,10 +126,10 @@ const [siaExpiryDate, setSiaExpiryDate] = useState("");
            </div> */}
         </div>
         {/* BEGIN: Users Layout */}
-        {$_.take(users, 9).map((user, userKey) => (
+        {employees.map((employee, employeeKey) => (
           
           <div
-            key={userKey}
+            key={employeeKey}
             className="intro-y col-span-12 md:col-span-6 lg:col-span-4"
           >
             <div className="box">
@@ -87,10 +138,10 @@ const [siaExpiryDate, setSiaExpiryDate] = useState("");
                  
                   <div className="lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">
                     <a href="" className="font-medium">
-                      {user.name}
+                      {employee.name}
                     </a>
                     <div className="text-slate-500 text-xs mt-0.5">
-                      {user.role.title}
+                      {employee.employee_id}
                     </div>
                   </div>
                 </div>
@@ -117,12 +168,12 @@ const [siaExpiryDate, setSiaExpiryDate] = useState("");
                 <div></div>
                 <div className="flex items-center justify-center lg:justify-start text-slate-500 mt-5">
                   <Lucide icon="Mail" className="w-3 h-3 mr-2" />
-                  {user.email_address
+                  {employee.email_address
                   }
                 </div>
                 <div className="flex items-center justify-center lg:justify-start text-slate-500 mt-1">
                   <Lucide icon="CreditCard" className="w-3 h-3 mr-2" />
-                  {user.nic}
+                  {employee.phone_number}
                 </div>
               </div>
               {/*<div className="text-center lg:text-right p-5 border-t border-slate-200/60 dark:border-darkmode-400">
@@ -164,7 +215,7 @@ const [siaExpiryDate, setSiaExpiryDate] = useState("");
                     >
                       <ModalHeader>
                         <h2 className="font-medium text-base mr-auto">
-                          New Form
+                          New Employee Form
                         </h2>
                        
                       </ModalHeader>
@@ -197,6 +248,32 @@ const [siaExpiryDate, setSiaExpiryDate] = useState("");
                     </div>
                     <div className="col-span-12 sm:col-span-6">
                       <label htmlFor="modal-form-3" className="form-label">
+                      Country
+                      </label>
+                      <input
+                        id="address"
+                        type="text"
+                        className="form-control"
+                        placeholder="Pakistan"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-span-12 sm:col-span-6">
+                    <label htmlFor="modal-form-3" className="form-label">
+                    City
+                    </label>
+                    <input
+                      id="address"
+                      type="text"
+                      className="form-control"
+                      placeholder="Lahore"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
+                  </div>
+                    <div className="col-span-12 sm:col-span-6">
+                      <label htmlFor="modal-form-3" className="form-label">
                         Address
                       </label>
                       <input
@@ -223,7 +300,7 @@ const [siaExpiryDate, setSiaExpiryDate] = useState("");
                     </div>
                     <div className="col-span-12 sm:col-span-6">
                       <label htmlFor="modal-form-5" className="form-label">
-                        Mobile Num
+                        Mobile Number
                       </label>
                       <input
                         id="mobile-num"
@@ -235,6 +312,37 @@ const [siaExpiryDate, setSiaExpiryDate] = useState("");
                       />
                     </div>
                     <div className="col-span-12 sm:col-span-6">
+                          <label htmlFor="modal-form-4" className="form-label">
+                           Gender
+                          </label>
+                          <select 
+                          id="modal-form-6" 
+                          className="form-select"
+                          value={gender} onChange={handleGenderChange}
+                          >
+                          <option value="">Select Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
+                          </select>
+                        </div>
+                        <div className="col-span-12 sm:col-span-6">
+                        <label htmlFor="modal-form-10" className="form-label">
+                        Manager
+                      </label>
+                      <select 
+                      id="modal-form-11" 
+                      className="form-select"
+                      value={manager} 
+                      onChange={handleManagerChange}
+                      >
+                      <option value="">Select Manager</option>
+                      {options.map((option, index) => (
+                        <option key={index} value={option.id}>{option.name}</option>
+                      ))}
+                      </select>
+                        </div>
+                       <div className="col-span-12 sm:col-span-6">
                       <label htmlFor="modal-form-6" className="form-label">
                         BRP Expiry
                       </label>
@@ -268,7 +376,7 @@ const [siaExpiryDate, setSiaExpiryDate] = useState("");
                         id="sia-issue-date"
                         type="text"
                         className="form-control"
-                        placeholder="DD/MM/YYYY"
+                        placeholder="dd/mm/yyyy"
                         value={siaIssueDate}
                         onChange={(e) => setSiaIssueDate(e.target.value)}
                       />
@@ -281,11 +389,91 @@ const [siaExpiryDate, setSiaExpiryDate] = useState("");
                         id="sia-expiry-date"
                         type="text"
                         className="form-control"
-                        placeholder="DD/MM/YYYY"
+                        placeholder="dd/mm/yyyy"
                         value={siaExpiryDate}
                         onChange={(e) => setSiaExpiryDate(e.target.value)}
                       />
                     </div>
+                    <div className="col-span-12 sm:col-span-6">
+                    <label htmlFor="modal-form-6" className="form-label">
+                      Joining Date
+                    </label>
+                    <input
+                      id="joining-date"
+                      type="date"
+                      className="form-control"
+                      placeholder="01/01/2023"
+                      value={joiningDate}
+                      onChange={(e) => setJoiningDate(e.target.value)}
+                    />
+                  </div>
+                  <div className="col-span-12 sm:col-span-6">
+                  <label htmlFor="modal-form-2" className="form-label">
+                    Allocated Leaves
+                  </label>
+                  <input
+                    id="allocated-leaves"
+                    type="number"
+                    className="form-control"
+                    placeholder="Enter allocated leaves"
+                    value={allocatedLeaves}
+                    onChange={(e) => {setAllocatedLeaves(e.target.value)}}
+                  />
+                </div>
+          
+                <div className="col-span-12 sm:col-span-6">
+                  <label htmlFor="modal-form-3" className="form-label">
+                    Consumed Leaves
+                  </label>
+                  <input
+                    id="consumed-leaves"
+                    type="number"
+                    className="form-control"
+                    placeholder="Enter consumed leaves"
+                    value={consumedLeaves}
+                    onChange={(e) => {setConsumedLeaves(e.target.value)}}
+                  />
+                </div>
+          
+                <div className="col-span-12 sm:col-span-6">
+                  <label htmlFor="modal-form-4" className="form-label">
+                    Probation Period
+                  </label>
+                  <input
+                    id="probation-period"
+                    type="number"
+                    className="form-control"
+                    placeholder="Enter probation period"
+                    value={probationPeriod}
+                    onChange={(e) => {setProbationPeriod(e.target.value)}}
+                  />
+                </div>
+                <div className="col-span-12 sm:col-span-6">
+                <label htmlFor="modal-form-2" className="form-label">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  className="form-control"
+                  placeholder="john@example.com"
+                  value={email}
+                  onChange={(e) => {setEmail(e.target.value)}}
+                />
+              </div>
+                <div className="col-span-12 sm:col-span-6">
+                <label htmlFor="modal-form-5" className="form-label">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  className="form-control"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => {setPassword(e.target.value);}}
+                />
+              </div>
                       </ModalBody>
                       <ModalFooter>
                         <button
@@ -300,20 +488,20 @@ const [siaExpiryDate, setSiaExpiryDate] = useState("");
                         <button 
                         type="button" 
                         className="btn btn-primary w-20"
-                        
+                        onClick={handleClick}
                         >
                           Create
                         </button>
                       </ModalFooter>
                     </Modal>
                     {/* END: Modal Content */}
-                 
+
                   <Source>
                     <Highlight>
-                     
+
                     </Highlight>
                   </Source>
-              
+         
               </>
             )}
           </PreviewComponent>

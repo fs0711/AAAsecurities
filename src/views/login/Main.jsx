@@ -21,8 +21,6 @@ function Main() {
 
   useEffect(() => {
     dom("body").removeClass("main").removeClass("error-page").addClass("login");
-
-    // console.log(expirationTime);
     
   }, []);
 

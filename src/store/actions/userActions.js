@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { makeConfig } from './authActions';
+import { lte } from 'lodash';
 
 
 
@@ -29,17 +30,19 @@ export const getAllUsers = () => async (dispatch, getState) => {
     const config = await makeConfig('application/json');
 
     const organization = '64a4225fe5f10e65cca94fe3';
-    const body = JSON.stringify({
-        name, 
-        email_address,
-        password,
-        gender,
-        role,
-        organization,
+    const roleNumber = parseInt(role, 10);
+
+    const body = {
+        name: name, 
+        email_address: email_address,
+        password: password,
+        gender:gender,
+        role:roleNumber,
+        organization:organization,
         manager:id,
         phone_number:phoneNumber
 
-      });
+      };
   
     try {
 
@@ -49,11 +52,11 @@ export const getAllUsers = () => async (dispatch, getState) => {
         body,
         config
       );
-      console.log(res)
-    //   dispatch({
-    //     type: 'GET_USERS',
-    //     payload:data.data.response_data
-    //   });
+      // console.log(res)
+      dispatch({
+        type: 'CREATE_USERS',
+        payload:res.data.response_data
+      });
     } catch (err) {
       console.log(err);
     }
