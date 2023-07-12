@@ -56,7 +56,7 @@ function Main(props) {
               className="logo__image w-6"
               src={logoUrl}
             />
-            <span className="logo__text text-white text-lg ml-3"> AAA Security </span>
+            <span className="logo__text text-white text-lg ml-3"> Munas HRM </span>
           </Link>
           {/* END: Logo */}
           {/* BEGIN: Breadcrumb */}
