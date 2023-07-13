@@ -18,9 +18,16 @@ import ReportDonutChart from "@/components/report-donut-chart/Main";
 import ReportDonutChart1 from "@/components/report-donut-chart-1/Main";
 import SimpleLineChart1 from "@/components/simple-line-chart-1/Main";
 import ReportMap from "@/components/report-map/Main";
-import { useRef, useState } from "react";
+import { useRef, useState,useEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { getAllUsers } from "../../store/actions";
 
 function Main() {
+
+
+  const dispatch = useDispatch();
+
+
   const [salesReportFilter, setSalesReportFilter] = useState();
   const importantNotesRef = useRef();
   const prevImportantNotes = () => {
@@ -29,6 +36,13 @@ function Main() {
   const nextImportantNotes = () => {
     importantNotesRef.current.tns.goTo("next");
   };
+
+  useEffect(() => {
+
+    dispatch(getAllUsers());
+
+  }, []);
+
 console.log("Home page")
   return (
     <div className="grid grid-cols-12 gap-6">

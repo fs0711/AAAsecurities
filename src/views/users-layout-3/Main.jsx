@@ -47,8 +47,6 @@ function Main() {
  
   useEffect(() => {
 
-    dispatch(getAllUsers());
-    // console.log(users)
     setOptions(users);
 
     const fetchData = async () => {
