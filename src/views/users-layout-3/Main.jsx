@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
 import { getAllUsers } from "../../store/actions";
 import { createUser } from "../../store/actions";
+import RestrictedPage from "./RestrictedPage";
 
 function Main() {
 
@@ -29,13 +30,37 @@ function Main() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
   const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state)=> state.auth.token)
+
   const [headerFooterModalPreview, setHeaderFooterModalPreview] =
   useState(false);
+  const [options, setOptions] = useState([]);
+  const [data, setData] = useState([]);
+
+  const config = {
+    headers: {
+      
+       'x-session-key' : token,
+      'x-session-type': 'application/json'
+    }
+  };
  
   useEffect(() => {
 
     dispatch(getAllUsers());
     // console.log(users)
+    setOptions(users);
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://munashrmsapi.digtrosoft.com/api/organizations/getorganizations', config);
+        setData(response.data.response_data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
 
   }, []);
 
@@ -45,6 +70,8 @@ function Main() {
   const [gender, setGender] = useState('');
   const [role, setRole] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [manager, setManager] = useState("");
+  const [organization, setOrganization] = useState("");
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -65,7 +92,12 @@ function Main() {
   const handleRoleChange = (event) => {
     setRole(event.target.value);
   };
-
+  const handleManagerChange = (event) => {
+    setManager(event.target.value);
+  };
+  const handleOrganizationChange = (event) => {
+    setOrganization(event.target.value);
+  };
   const handlePhoneNumberChange = (event) => {
     setPhoneNumber(event.target.value);
   };
@@ -74,17 +106,19 @@ function Main() {
     event.preventDefault();
 
     // Handle form submission logic, e.g., send data to the server
-    console.log('Submitted:', {
-      name,
-      email,
-      password,
-      gender,
-      role,
-      phoneNumber,
+    // console.log('Submitted:', {
+    //   name,
+    //   email,
+    //   password,
+    //   gender,
+    //   role,
+    //   phoneNumber,
+    //   manager,
+    //   organization,
       
-    });
+    // });
 
-    dispatch(createUser(name, email, password, gender, role, phoneNumber, user.id))
+    dispatch(createUser(name, email, password, gender, role, phoneNumber, manager, organization))
     // Reset form fields
     setName('');
     setEmail('');
@@ -92,11 +126,15 @@ function Main() {
     setGender('');
     setRole('');
     setPhoneNumber('');
+    setManager('');
+    setOrganization('');
   };
 
 
   return (
     <>
+    {user.role.user_role_id === 1 ? (
+      <>
       <h2 className="intro-y text-lg font-medium mt-10">Users Layout</h2>
       <div className="grid grid-cols-12 gap-6 mt-5">
         <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
@@ -122,7 +160,7 @@ function Main() {
            </div> */}
         </div>
         {/* BEGIN: Users Layout */}
-        {$_.take(users, 9).map((user, userKey) => (
+        {users.map((user, userKey) => (
           
           <div
             key={userKey}
@@ -264,6 +302,22 @@ function Main() {
                           </select>
                         </div>
                         <div className="col-span-12 sm:col-span-6">
+                        <label htmlFor="modal-form-10" className="form-label">
+                        Organization
+                      </label>
+                      <select 
+                      id="modal-form-11" 
+                      className="form-select"
+                      value={organization} 
+                      onChange={handleOrganizationChange}
+                      >
+                      <option value="">Select Organization</option>
+                      {data.map((option, index) => (
+                        <option key={index} value={option.id}>{option.name}</option>
+                      ))}
+                      </select>
+                        </div>
+                        <div className="col-span-12 sm:col-span-6">
                           <label htmlFor="modal-form-5" className="form-label">
                             Role
                           </label>
@@ -278,6 +332,22 @@ function Main() {
                           <option value={3}>Assistant Manager</option>
                           <option value={4}>User</option>
                           </select>
+                        </div>
+                        <div className="col-span-12 sm:col-span-6">
+                        <label htmlFor="modal-form-10" className="form-label">
+                        Manager
+                      </label>
+                      <select 
+                      id="modal-form-11" 
+                      className="form-select"
+                      value={manager} 
+                      onChange={handleManagerChange}
+                      >
+                      <option value="">Select Manager</option>
+                      {options.map((option, index) => (
+                        <option key={index} value={option.id}>{option.name}</option>
+                      ))}
+                      </select>
                         </div>
                         <div className="col-span-12 sm:col-span-6">
                           <label htmlFor="modal-form-6" className="form-label">
@@ -324,6 +394,10 @@ function Main() {
           </PreviewComponent>
           {/* END: Header & Footer Modal */}
       </div>
+      </>
+    ):(
+      <RestrictedPage />
+    )}
     </>
   );
 }

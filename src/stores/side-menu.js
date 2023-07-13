@@ -508,5 +508,4 @@ const sideMenu = atom({
     ],
   },
 });
-
-export { sideMenu };
+export { sideMenu};

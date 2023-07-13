@@ -24,12 +24,10 @@ export const getAllUsers = () => async (dispatch, getState) => {
     }
   };
 
-  export const createUser = (name, email_address, password, gender, role, phoneNumber, id) => async (dispatch, getState) => {
+  export const createUser = (name, email_address, password, gender, role, phoneNumber, manager, organization) => async (dispatch, getState) => {
    
   
     const config = await makeConfig('application/json');
-
-    const organization = '64a4225fe5f10e65cca94fe3';
     const roleNumber = parseInt(role, 10);
 
     const body = {
@@ -39,7 +37,7 @@ export const getAllUsers = () => async (dispatch, getState) => {
         gender:gender,
         role:roleNumber,
         organization:organization,
-        manager:id,
+        manager:manager,
         phone_number:phoneNumber
 
       };
