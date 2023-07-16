@@ -12,18 +12,28 @@ import MobileMenu from "@/components/mobile-menu/Main";
 import MainColorSwitcher from "@/components/main-color-switcher/Main";
 import DarkModeSwitcher from "@/components/dark-mode-switcher/Main";
 import SideMenuTooltip from "@/components/side-menu-tooltip/Main";
+import { useDispatch, useSelector } from 'react-redux';
 
 function Main() {
+
   const navigate = useNavigate();
   const location = useLocation();
   const [formattedMenu, setFormattedMenu] = useState([]);
   const sideMenuStore = useRecoilValue(useSideMenuStore);
   const sideMenu = () => nestedMenu($h.toRaw(sideMenuStore.menu), location);
 
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+
   useEffect(() => {
     dom("body").removeClass("error-page").removeClass("login").addClass("main");
     setFormattedMenu(sideMenu());
   }, [sideMenuStore, location.pathname]);
+
+  if(!isAuthenticated)
+  {
+    return navigate('/');
+  }
 
   return (
     <div className="py-5 md:py-0">

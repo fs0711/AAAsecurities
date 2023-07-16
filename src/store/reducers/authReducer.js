@@ -44,6 +44,11 @@ const authReducer = (state = initState, action) => {
 
         // Reset any other authentication-related state
       };
+      case 'USER_AUTH_FAIL':
+        return {
+          ...state,
+          isAuthenticated: false,
+        }
     default:
       return state;
   }

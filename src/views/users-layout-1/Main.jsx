@@ -27,22 +27,28 @@ function Main() {
 
 
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const users = useSelector((state) => state.users.users);
   const employees = useSelector((state) => state.employee.employees);
   const user = useSelector((state) => state.auth.user);
   const [headerFooterModalPreview, setHeaderFooterModalPreview] =
   useState(false);
   const [options, setOptions] = useState([]);
+
+
   useEffect(() => {
 
     dispatch(getAllEmployees());
 
     setOptions(users);
-  }, []);
+  }, [dispatch]);
 
-  
+  if(!isAuthenticated)
+  {
+    return navigate('/');
+  }
 
-  const [employeeName, setEmployeeName] = useState("");
+const [employeeName, setEmployeeName] = useState("");
 const [designation, setDesignation] = useState("");
 const [address, setAddress] = useState("");
 const [postCode, setPostCode] = useState("");

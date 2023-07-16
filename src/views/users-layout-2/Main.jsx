@@ -17,26 +17,60 @@ import {
 } from "@/base-components";
 import { faker as $f } from "@/utils";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCLients, createClient } from "../../store/actions";
 
 function Main() {
 
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated );
+  const clients = useSelector((state) => state.client.clients)
   const [headerFooterModalPreview, setHeaderFooterModal] =
   useState(false);
   const [headerFooterModalPreview1, setHeaderFooterModal1] =
   useState(false);
 
+  if(!isAuthenticated)
+  {
+    return navigate('/');
+  }
   
+  useEffect(() => {
+
+    dispatch(getAllCLients());
+
+    console.log (clients)
+
+  }, [dispatch]);
 
 // Define state variables
 const [clientName, setClientName] = useState("");
 const [contactPerson, setContactPerson] = useState("");
-const [cpNumber, setCpNumber] = useState("");
+const [cpNumber, setCpNumber] = useState([]);
 const [address, setAddress] = useState("");
 const [city, setCity] = useState("");
 const [country, setCountry] = useState("");
 const [zipCode, setZipCode] = useState("");
 const [cpEmail, setCpEmail] = useState("");
 const [numberOfSites, setNumberOfSites] = useState(0);
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+
+  dispatch(createClient(clientName, contactPerson, cpNumber, address, city, country, zipCode, cpEmail, numberOfSites ))
+
+  setClientName('');
+  setContactPerson('');
+  setCpNumber([]);
+  setAddress('');
+  setCity('');
+  setCountry('');
+  setZipCode('');
+  setCpEmail('');
+  setNumberOfSites(0);
+  
+
+};
 
   return (
     <>
@@ -66,35 +100,60 @@ const [numberOfSites, setNumberOfSites] = useState(0);
           </div> */}
         </div>
         {/* BEGIN: Users Layout */}
-        {$f().map((faker, fakerKey) => (
-          <div key={fakerKey} className="intro-y col-span-12 md:col-span-6">
-            <div className="box">
-              <div className="flex flex-col lg:flex-row items-center p-5">
-                <div className="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                  <img
-                    alt="Midone Tailwind HTML Admin Template"
-                    className="rounded-full"
-                    src={faker.photos[0]}
-                  />
-                </div>
-                <div className="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                  <button
-                  href=""
-                  onClick={() => {
-                    setHeaderFooterModal1(true);
-                  }}
-                   className="font-medium"
-                   >
-                    {faker.users[0].name}
-                  </button>
+        {clients.map((client, clientKey) => (
+          <div
+          key={clientKey}
+          className="intro-y col-span-12 md:col-span-6 lg:col-span-4"
+        >
+          <div className="box">
+            <div className="flex items-start px-5 pt-5">
+              <div className="w-full flex flex-col lg:flex-row items-center">
+               
+                <div className="lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">
+                  <a href="" className="font-medium">
+                    {client.name}
+                  </a>
                   <div className="text-slate-500 text-xs mt-0.5">
-                    {faker.jobs[0]}
+                    {client.client_id}
                   </div>
                 </div>
-
+              </div>
+              <Dropdown className="absolute right-0 top-0 mr-5 mt-3">
+                <DropdownToggle tag="a" className="w-5 h-5 block" href="#">
+                  <Lucide
+                    icon="MoreHorizontal"
+                    className="w-5 h-5 text-slate-500"
+                  />
+                </DropdownToggle>
+                <DropdownMenu className="w-40">
+                  <DropdownContent>
+                    <DropdownItem>
+                      <Lucide icon="Edit2" className="w-4 h-4 mr-2" /> Edit
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Lucide icon="Trash" className="w-4 h-4 mr-2" /> Delete
+                    </DropdownItem>
+                  </DropdownContent>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+            <div className="text-center lg:text-left p-5">
+              <div></div>
+              <div className="flex items-center justify-center lg:justify-start text-slate-500 mt-5">
+                <Lucide icon="Mail" className="w-3 h-3 mr-2" />
+                {client.cp_email_address}
               </div>
             </div>
+            {/*<div className="text-center lg:text-right p-5 border-t border-slate-200/60 dark:border-darkmode-400">
+              <button className="btn btn-primary py-1 px-2 mr-2">
+                Message
+              </button>
+              <button className="btn btn-outline-secondary py-1 px-2">
+                Profile
+              </button>
+              </div> */}
           </div>
+        </div>
         ))}
         {/* BEGIN: Users Layout */}
                   {/* BEGIN: Header & Footer Modal */}
@@ -163,9 +222,9 @@ const [numberOfSites, setNumberOfSites] = useState(0);
                               id="modal-form-3"
                               type="text"
                               className="form-control"
-                              placeholder="CP No."
+                              placeholder="+923xxxxxxxxx"
                               value={cpNumber}
-                              onChange={(e) => setCpNumber(e.target.value)}
+                              onChange={(e) => setCpNumber([e.target.value])}
                             />
                           </div>
                           <div className="col-span-12 sm:col-span-6">
@@ -260,7 +319,7 @@ const [numberOfSites, setNumberOfSites] = useState(0);
                               <button 
                               type="button" 
                               className="btn btn-primary w-20"
-                              
+                              onClick={handleSubmit}
                               >
                                 Create
                               </button>

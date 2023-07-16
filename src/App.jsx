@@ -4,6 +4,8 @@ import { RecoilRoot } from "recoil";
 import Router from "./router";
 import { Provider } from 'react-redux';
 import {rStore} from "./store"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const { store, persistor } = rStore();
@@ -13,6 +15,7 @@ function App() {
     <RecoilRoot>
       <BrowserRouter>
         <Router />
+        <ToastContainer />
         <ScrollToTop />
       </BrowserRouter>
     </RecoilRoot>

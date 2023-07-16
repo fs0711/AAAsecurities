@@ -14,10 +14,20 @@ export const getAllEmployees = () => async (dispatch, getState) => {
         config
       );
       console.log(data.data.response_data)
-      dispatch({
-        type: 'GET_EMPLOYEES',
-        payload:data.data.response_data
-      });
+      if(data.data.response_code === 200)
+      {
+        dispatch({
+          type: 'GET_EMPLOYEES',
+          payload:data.data.response_data
+        });
+      }
+      else 
+      {
+        dispatch({
+          type: 'USER_AUTH_FAIL',
+        }); 
+      }
+     
     } catch (err) {
       console.log(err);
     }
@@ -60,16 +70,26 @@ export const getAllEmployees = () => async (dispatch, getState) => {
     try {
 
 
-      // const res = await axios.post(
-      //   `http://munashrmsapi.digtrosoft.com/api/employees/create`,
-      //   body,
-      //   config
-      // );
-      // // console.log(res)
-      // dispatch({
-      //   type: 'CREATE_EMPLOYEE',
-      //   payload:res.data.response_data
-      // });
+      const res = await axios.post(
+        `http://munashrmsapi.digtrosoft.com/api/employees/create`,
+        body,
+        config
+      );
+      // console.log(res)
+      if(data.data.response_code === 200)
+      {
+        dispatch({
+          type: 'CREATE_EMPLOYEE',
+          payload:res.data.response_data
+        });
+      }
+      else 
+      {
+        dispatch({
+          type: 'USER_AUTH_FAIL',
+        }); 
+      }
+     
     } catch (err) {
       console.log(err);
     }

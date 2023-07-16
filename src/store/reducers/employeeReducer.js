@@ -4,7 +4,7 @@ const initState = {
   };
 
 
-  const userReducer = (state = initState, action) => {
+  const clientReducer = (state = initState, action) => {
     let index = null;
   
     switch (action.type) {
@@ -14,7 +14,7 @@ const initState = {
           employees: action.payload,
           isLoading: false
         };
-      case 'CREATE_USERS':
+      case 'CREATE_EMPLOYEE':
         return {
           ...state,
           employees: employees.push(action.payload)
@@ -28,4 +28,4 @@ const initState = {
 
       
       
-export default userReducer;
+export default clientReducer;

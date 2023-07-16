@@ -14,11 +14,21 @@ export const getAllUsers = () => async (dispatch, getState) => {
         `http://munashrmsapi.digtrosoft.com/api/users/read`,
         config
       );
-    //   console.log(data.data.response_data)
-      dispatch({
-        type: 'GET_USERS',
-        payload:data.data.response_data
-      });
+      console.log(data.data)
+      if(data.data.response_code === 200)
+      {
+        dispatch({
+          type: 'GET_USERS',
+          payload:data.data.response_data
+        });
+      }
+      else 
+      {
+        dispatch({
+          type: 'USER_AUTH_FAIL',
+        }); 
+      }
+   
     } catch (err) {
       console.log(err);
     }
@@ -51,10 +61,20 @@ export const getAllUsers = () => async (dispatch, getState) => {
         config
       );
       // console.log(res)
-      dispatch({
-        type: 'CREATE_USERS',
-        payload:res.data.response_data
-      });
+      if(res.data.response_code === 200)
+      {
+        dispatch({
+          type: 'CREATE_USERS',
+          payload:res.data.response_data
+        });
+      }
+      else 
+      {
+        dispatch({
+          type: 'USER_AUTH_FAIL',
+        }); 
+      }
+      
     } catch (err) {
       console.log(err);
     }

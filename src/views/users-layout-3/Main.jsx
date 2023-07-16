@@ -28,6 +28,7 @@ function Main() {
 
 
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated );
   const users = useSelector((state) => state.users.users);
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state)=> state.auth.token)
@@ -36,6 +37,11 @@ function Main() {
   useState(false);
   const [options, setOptions] = useState([]);
   const [data, setData] = useState([]);
+
+  if(!isAuthenticated)
+  {
+    return navigate('/');
+  }
 
   const config = {
     headers: {
@@ -47,6 +53,7 @@ function Main() {
  
   useEffect(() => {
 
+    dispatch(getAllUsers())
     setOptions(users);
 
     const fetchData = async () => {
