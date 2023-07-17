@@ -25,6 +25,7 @@ import CrudDataList from "../views/crud-data-list/Main";
 import CrudForm from "../views/crud-form/Main";
 import UsersLayout1 from "../views/users-layout-1/Main";
 import UsersLayout2 from "../views/users-layout-2/Main";
+import Sites from "../views/users-layout-2/Sites";
 import UsersLayout3 from "../views/users-layout-3/Main";
 import ProfileOverview1 from "../views/profile-overview-1/Main";
 import ProfileOverview2 from "../views/profile-overview-2/Main";
@@ -86,6 +87,10 @@ function Router() {
         {
           path: "home",
           element: <DashboardOverview1 />,
+        },
+        {
+          path: "sites",
+          element: <Sites />,
         },
         {
           path: "dashboard-overview-2",

@@ -110,7 +110,12 @@ const handleSubmit = (event) => {
               <div className="w-full flex flex-col lg:flex-row items-center">
                
                 <div className="lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">
-                  <a href="" className="font-medium">
+                  <a 
+                   className="font-medium"
+                   onClick={() => {
+                    setHeaderFooterModal1(true);
+                  }}
+                  >
                     {client.name}
                   </a>
                   <div className="text-slate-500 text-xs mt-0.5">

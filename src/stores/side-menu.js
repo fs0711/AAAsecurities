@@ -198,13 +198,35 @@ const sideMenu = atom({
       },
       {
         icon: "Users",
-        title: "Clients",
-        pathname: "/clients",
+        title: "Client Management",
+        subMenu: [
+              {
+                icon: "",
+                pathname: "/clients",
+                title: "Clients",
+              },
+              {
+                icon: "",
+                pathname: "/sites",
+                title: "Sites",
+              },
+        ]
       },
       {
         icon: "Users",
-        title: "Employees",
-        pathname: "/employees",
+        title: "Employee Management",
+        subMenu: [
+              {
+                icon: "Trello",
+                pathname: "/employees",
+                title: "Employees",
+              },
+              // {
+              //   icon: "",
+              //   pathname: "/profile-overview-2",
+              //   title: "Overview 2",
+              // },
+        ]
       },
       // {
       //   icon: "Trello",
