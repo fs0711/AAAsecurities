@@ -20,8 +20,7 @@ import SimpleLineChart1 from "@/components/simple-line-chart-1/Main";
 import ReportMap from "@/components/report-map/Main";
 import { useRef, useState,useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers } from "../../store/actions";
-import { getAllEmployees } from "../../store/actions";
+import { getAllUsers, getSelectedUsers } from "../../store/actions";
 import { useNavigate } from "react-router-dom";
 
 function Main() {
@@ -29,6 +28,7 @@ function Main() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [salesReportFilter, setSalesReportFilter] = useState();
   const importantNotesRef = useRef();
@@ -41,8 +41,16 @@ function Main() {
 
   useEffect(() => {
 
-    dispatch(getAllUsers());
-    dispatch(getAllEmployees());
+    if(user.role.user_role_id === 1)
+      {
+        dispatch(getAllUsers());
+        dispatch(getSelectedUsers());
+      }
+      else
+      {
+        dispatch(getSelectedUsers());
+      }
+    
 
   }, []);
 

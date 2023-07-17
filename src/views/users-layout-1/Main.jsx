@@ -20,7 +20,7 @@ import * as $_ from "lodash";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
-import { getAllEmployees } from "../../store/actions";
+import { getAllEmployees, getSelectedUsers } from "../../store/actions";
 import { createEmployee } from "../../store/actions";
 
 function Main() {
@@ -28,7 +28,7 @@ function Main() {
 
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const users = useSelector((state) => state.users.users);
+  const selectedUsers = useSelector((state) => state.users.selectedUsers);
   const employees = useSelector((state) => state.employee.employees);
   const user = useSelector((state) => state.auth.user);
   const [headerFooterModalPreview, setHeaderFooterModalPreview] =
@@ -39,8 +39,9 @@ function Main() {
   useEffect(() => {
 
     dispatch(getAllEmployees());
+    dispatch(getSelectedUsers());
 
-      setOptions(employees);
+      setOptions(selectedUsers);
     
   }, [dispatch]);
 

@@ -1,5 +1,6 @@
 const initState = {
     users: [],
+    selectedUsers: [],
     isLoading: false,
   };
 
@@ -14,10 +15,18 @@ const initState = {
           users: action.payload,
           isLoading: false
         };
+        case 'GET_SELECTED_USERS':
+          // console.log(action.payload)
+        return {
+          ...state,
+          selectedUsers: action.payload,
+          isLoading: false
+        };
       case 'CREATE_USERS':
         return {
           ...state,
-         users: users.push(action.payload)
+         users: users.push(action.payload),
+         selectedUsers: selectedUsers.push(action.payload),
         };
         default:
             return {

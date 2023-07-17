@@ -25,6 +25,27 @@ export const getAllUsers = () => async (dispatch, getState) => {
     }
   };
 
+  export const getSelectedUsers = () => async (dispatch, getState) => {
+   
+  
+    const config = await makeConfig('application/json');
+  
+    try {
+      const data = await axios.get(
+        `http://munashrmsapi.digtrosoft.com/api/users/getuserchilds`,
+        config
+      );
+      console.log(data.data)
+        dispatch({
+          type: 'GET_SELECTED_USERS',
+          payload:data.data.response_data
+        });
+   
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   export const createUser = (name, email_address, password, gender, role, phoneNumber, manager, organization) => async (dispatch, getState) => {
    
   
