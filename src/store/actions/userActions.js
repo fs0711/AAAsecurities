@@ -15,19 +15,10 @@ export const getAllUsers = () => async (dispatch, getState) => {
         config
       );
       console.log(data.data)
-      if(data.data.response_code === 200)
-      {
         dispatch({
           type: 'GET_USERS',
           payload:data.data.response_data
         });
-      }
-      else 
-      {
-        dispatch({
-          type: 'USER_AUTH_FAIL',
-        }); 
-      }
    
     } catch (err) {
       console.log(err);

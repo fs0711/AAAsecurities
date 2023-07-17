@@ -21,6 +21,7 @@ import ReportMap from "@/components/report-map/Main";
 import { useRef, useState,useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers } from "../../store/actions";
+import { getAllEmployees } from "../../store/actions";
 import { useNavigate } from "react-router-dom";
 
 function Main() {
@@ -41,6 +42,7 @@ function Main() {
   useEffect(() => {
 
     dispatch(getAllUsers());
+    dispatch(getAllEmployees());
 
   }, []);
 

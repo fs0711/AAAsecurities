@@ -40,7 +40,8 @@ function Main() {
 
     dispatch(getAllEmployees());
 
-    setOptions(users);
+      setOptions(employees);
+    
   }, [dispatch]);
 
   if(!isAuthenticated)
@@ -343,6 +344,7 @@ const handleClick = () => {
                       onChange={handleManagerChange}
                       >
                       <option value="">Select Manager</option>
+                      <option value="None">None</option>
                       {options.map((option, index) => (
                         <option key={index} value={option.id}>{option.name}</option>
                       ))}
