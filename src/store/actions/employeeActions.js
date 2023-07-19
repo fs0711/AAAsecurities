@@ -76,8 +76,6 @@ export const getAllEmployees = () => async (dispatch, getState) => {
       };
   console.log(body)
     try {
-
-
       const res = await axios.post(
         `http://munashrmsapi.digtrosoft.com/api/employees/create`,
         body,
@@ -91,17 +89,17 @@ export const getAllEmployees = () => async (dispatch, getState) => {
           payload:res.data.response_data
         });
       }
-      else if(res.data.response_code == 4000)
-      {
-        //properly handle response codes
-        console.log(res.data.response_message);
-      }
-      else
+      else if(res.data.response_code == 5001)
       {
         console.log("FAILED CREATE EMPLOYEE")
         dispatch({
           type: 'USER_AUTH_FAIL',
         }); 
+        
+      }
+      else
+      {
+        alert(res.data.response_message);
       }
      
     } catch (err) {
