@@ -100,7 +100,7 @@ const resetForm = () => {
   setEmail("");
 };
 
-const handleClick = () => {
+const handleClick = (e) => {
   e.preventDefault();
   dispatch(createEmployee(employeeName, email, password, allocatedLeaves, consumedLeaves, probationPeriod, gender, joiningDate, country, city, address, postCode, mobileNum,brpExpiry,siaLicence,siaIssueDate,siaExpiryDate, manager, user.id ));
 

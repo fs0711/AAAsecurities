@@ -221,11 +221,11 @@ const sideMenu = atom({
                 pathname: "/employees",
                 title: "Employees",
               },
-              // {
-              //   icon: "",
-              //   pathname: "/profile-overview-2",
-              //   title: "Overview 2",
-              // },
+              {
+                icon: "",
+                pathname: "/Schedule",
+                title: "Schedule",
+              },
         ]
       },
       // {

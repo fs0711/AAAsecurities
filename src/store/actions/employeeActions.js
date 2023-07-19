@@ -21,12 +21,12 @@ export const getAllEmployees = () => async (dispatch, getState) => {
           payload:data.data.response_data
         });
       }
-      else 
-      {
-        dispatch({
-          type: 'USER_AUTH_FAIL',
-        }); 
-      }
+      // else 
+      // {
+      //   dispatch({
+      //     type: 'USER_AUTH_FAIL',
+      //   }); 
+      // }
      
     } catch (err) {
       console.log(err);
@@ -75,8 +75,8 @@ export const getAllEmployees = () => async (dispatch, getState) => {
         body,
         config
       );
-      // console.log(res)
-      if(data.data.response_code === 200)
+      console.log(res)
+      if(data.data)
       {
         dispatch({
           type: 'CREATE_EMPLOYEE',

@@ -24,6 +24,7 @@ import Calendar from "../views/calendar/Main";
 import CrudDataList from "../views/crud-data-list/Main";
 import CrudForm from "../views/crud-form/Main";
 import UsersLayout1 from "../views/users-layout-1/Main";
+import EmployeeDutyScheduler from "../views/users-layout-1/EmployeeScheduler";
 import UsersLayout2 from "../views/users-layout-2/Main";
 import Sites from "../views/users-layout-2/Sites";
 import UsersLayout3 from "../views/users-layout-3/Main";
@@ -91,6 +92,10 @@ function Router() {
         {
           path: "sites",
           element: <Sites />,
+        },
+        {
+          path: "Schedule",
+          element: <EmployeeDutyScheduler />,
         },
         {
           path: "dashboard-overview-2",
