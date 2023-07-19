@@ -40,13 +40,13 @@ export const getAllEmployees = () => async (dispatch, getState) => {
 
     const organization = '64a4225fe5f10e65cca94fe3';
     const joiningDateObject  = new Date(joiningDate);
-    const unixTimejoining = joiningDateObject.getTime() / 1000;
+    const unixTimejoining = joiningDateObject.getTime();
     const TimebrpExpiry = new Date(brpExpiry);
-    const unixTimebrpExpiry = TimebrpExpiry.getState() / 1000;
+    // const unixTimebrpExpiry = TimebrpExpiry.getState();
     const SiaIssueDate = new Date(siaIssueDate);
-    const unixsiaIssueDate = SiaIssueDate.getState() / 1000;
+    // const unixsiaIssueDate = SiaIssueDate.getState();
     const SiaExpiryDate = new Date(siaExpiryDate);
-    const unixsiaExpiryDate = SiaExpiryDate.getState() / 1000;
+    // const unixsiaExpiryDate = SiaExpiryDate.getState();
 
     const body = {
         name: employeeName, 
@@ -54,22 +54,22 @@ export const getAllEmployees = () => async (dispatch, getState) => {
         password: password,
         phone_number: mobileNum,
         gender:gender,
-        role:2,
-        organization:organization,
+        role:4,
+        // organization:organization,
         manager:manager,
         address: address,
         country,
         city,
-        assigned_to: manager,
-        assigned_by: id,
-        allocated_leaves: allocatedLeaves,
-        consumed_leaves: consumedLeaves,
+        // assigned_to: manager,
+        // assigned_by: id,
+        allocated_leaves: parseInt(allocatedLeaves),
+        consumed_leaves: parseInt(consumedLeaves),
         joining_date: unixTimejoining,
-        probation_period: probationPeriod,
-        siaLicence,
-        brpExpiry:unixTimebrpExpiry,
-        siaIssue:unixsiaIssueDate,
-        siaExpiry:unixsiaExpiryDate,
+        probation_period: parseInt(probationPeriod),
+        // siaLicence,
+        // brpExpiry:unixTimebrpExpiry,
+        // siaIssue:unixsiaIssueDate,
+        // siaExpiry:unixsiaExpiryDate,
 
 
 
@@ -83,16 +83,22 @@ export const getAllEmployees = () => async (dispatch, getState) => {
         body,
         config
       );
-      console.log(res)
-      if(data.data)
+      console.log(res.data)
+      if(res.data.response_code == 200)
       {
         dispatch({
           type: 'CREATE_EMPLOYEE',
           payload:res.data.response_data
         });
       }
-      else 
+      else if(res.data.response_code == 4000)
       {
+        //properly handle response codes
+        console.log(res.data.response_message);
+      }
+      else
+      {
+        console.log("FAILED CREATE EMPLOYEE")
         dispatch({
           type: 'USER_AUTH_FAIL',
         }); 

@@ -60,7 +60,7 @@ export const getAllSites = () => async (dispatch, getState) => {
         config
       );
       console.log(res)
-      if(data.data.response_code === 200)
+      if(res.data.response_code === 200)
       {
         dispatch({
           type: 'CREATE_SITE',

@@ -35,33 +35,30 @@ export const getAllCLients = () => async (dispatch, getState) => {
 
   export const createClient = (clientName, contactPerson, cpNumber, address, city, country, zipCode, cpEmail, numberOfSites) => async (dispatch, getState) => {
    
-  
+  const number = [cpNumber]
     const config = await makeConfig('application/json');
 
     const organization = '64a4225fe5f10e65cca94fe3';
 
     const body = {
       name: clientName,
-      organization,
-      cp_phone_number: cpNumber,
+      // organization,
+      cp_phone_number: number,
       cp_email_address: cpEmail,
       contact_person: contactPerson,
       country,
       city,
       zipcode:zipCode,
-
       };
   console.log(body)
     try {
-
-
       const res = await axios.post(
         `http://munashrmsapi.digtrosoft.com/api/clients/create`,
         body,
         config
       );
-      // console.log(res)
-      if(data.data.response_code === 200)
+      console.log(res)
+      if(res.data.response_code === 200)
       {
         dispatch({
           type: 'CREATE_CLIENT',
