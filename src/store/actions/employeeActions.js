@@ -41,9 +41,12 @@ export const getAllEmployees = () => async (dispatch, getState) => {
     const organization = '64a4225fe5f10e65cca94fe3';
     const joiningDateObject  = new Date(joiningDate);
     const unixTimejoining = joiningDateObject.getTime() / 1000;
-    // const unixTimebrpExpiry = brpExpiry.getState() / 1000;
-    // const unixsiaIssueDate = siaIssueDate.getState() / 1000;
-    // const unixsiaExpiryDate = siaExpiryDate.getState() / 1000;
+    const TimebrpExpiry = new Date(brpExpiry);
+    const unixTimebrpExpiry = TimebrpExpiry.getState() / 1000;
+    const SiaIssueDate = new Date(siaIssueDate);
+    const unixsiaIssueDate = SiaIssueDate.getState() / 1000;
+    const SiaExpiryDate = new Date(siaExpiryDate);
+    const unixsiaExpiryDate = SiaExpiryDate.getState() / 1000;
 
     const body = {
         name: employeeName, 
@@ -63,6 +66,11 @@ export const getAllEmployees = () => async (dispatch, getState) => {
         consumed_leaves: consumedLeaves,
         joining_date: unixTimejoining,
         probation_period: probationPeriod,
+        siaLicence,
+        brpExpiry:unixTimebrpExpiry,
+        siaIssue:unixsiaIssueDate,
+        siaExpiry:unixsiaExpiryDate,
+
 
 
       };
