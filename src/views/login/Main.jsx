@@ -1,6 +1,6 @@
 import DarkModeSwitcher from "@/components/dark-mode-switcher/Main";
 import dom from "@left4code/tw-starter/dist/js/dom";
-import logoUrl from "@/assets/images/logo.svg";
+// import logoUrl from "@/assets/images/logo.svg";
 import illustrationUrl from "@/assets/images/illustration.svg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,8 +21,21 @@ function Main() {
 
   useEffect(() => {
     dom("body").removeClass("main").removeClass("error-page").addClass("login");
-    
+  //   if(isAuthenticated)
+  // {
+  //   return navigate('/home');
+  // }
+
   }, []);
+  
+  useEffect(() => {
+    console.log(isAuthenticated);
+    if(isAuthenticated) return navigate('/home');
+ 
+
+
+  }, [isAuthenticated]);
+  
 
   const [credentials, setCredentials] = useState({
     email: '',
@@ -44,11 +57,7 @@ function Main() {
 
   };
 
-  if(isAuthenticated)
-  {
-    return navigate('/home');
-  }
-
+  
   return (
     <>
       <div>
@@ -58,11 +67,11 @@ function Main() {
             {/* BEGIN: Login Info */}
             <div className="hidden xl:flex flex-col min-h-screen">
               <a href="" className="-intro-x flex items-center pt-5">
-                <img
+                {/* <img
                   alt="Munas HRM"
                   className="w-6"
                   src={logoUrl}
-                />
+                /> */}
                 <span className="text-white text-lg ml-3"> Munas HRM </span>
               </a>
               <div className="my-auto">

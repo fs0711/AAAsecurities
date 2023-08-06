@@ -3,7 +3,7 @@ import TomSelect from "tom-select";
 import _, { clone } from "lodash";
 
 const setValue = (el, props) => {
-  if (props.value.length) {
+  if (props.value?.length) {
     dom(el).val(props.value);
   }
 };
