@@ -13,7 +13,7 @@ import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
-function EmployeeDutyScheduler() {
+function CreateAttendance() {
   const dispatch = useDispatch();
   const clients = useSelector((state) => state.client.clients);
   const sites = useSelector((state) => state.sites.sites);
@@ -89,7 +89,7 @@ function EmployeeDutyScheduler() {
   };
   return (
     <div className="mt-8">
-      <h1 className="text-3xl font-bold mb-4">Duty Scheduler</h1>
+      <h1 className="text-3xl font-bold mb-4">Attendance</h1>
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex justify-between mb-4">
           <div className="w-1/2">
@@ -247,7 +247,7 @@ function EmployeeDutyScheduler() {
             onClick={addNewEmployee}
             className="btn btn-primary shadow-md mr-2"
           >
-            Add New Schedule
+            Add New Attendance
           </button>
         </div>
       </div>
@@ -255,4 +255,4 @@ function EmployeeDutyScheduler() {
   );
 }
 
-export default EmployeeDutyScheduler;
+export default CreateAttendance;

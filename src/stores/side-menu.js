@@ -223,8 +223,13 @@ const sideMenu = atom({
               },
               {
                 icon: "",
-                pathname: "/Schedule",
+                pathname: "/view-schedule",
                 title: "Schedule",
+              },
+              {
+                icon: "",
+                pathname: "/attendance",
+                title: "Attendance",
               },
         ]
       },
@@ -249,133 +254,7 @@ const sideMenu = atom({
       //     },
       //   ],
       // },
-      {
-        icon: "Layout",
-        title: "Invoice",
-        pathname: "/invoice-layout-1",
-        // subMenu: [
-        //   {
-        //     icon: "",
-        //     title: "Wizards",
-        //     subMenu: [
-        //       {
-        //         icon: "",
-        //         pathname: "/wizard-layout-1",
-        //         title: "Layout 1",
-        //       },
-        //       {
-        //         icon: "",
-        //         pathname: "/wizard-layout-2",
-        //         title: "Layout 2",
-        //       },
-        //       {
-        //         icon: "",
-        //         pathname: "/wizard-layout-3",
-        //         title: "Layout 3",
-        //       },
-        //     ],
-        //   },
-        //   {
-        //     icon: "",
-        //     title: "Blog",
-        //     subMenu: [
-        //       {
-        //         icon: "",
-        //         pathname: "/blog-layout-1",
-        //         title: "Layout 1",
-        //       },
-        //       {
-        //         icon: "",
-        //         pathname: "/blog-layout-2",
-        //         title: "Layout 2",
-        //       },
-        //       {
-        //         icon: "",
-        //         pathname: "/blog-layout-3",
-        //         title: "Layout 3",
-        //       },
-        //     ],
-        //   },
-        //   {
-        //     icon: "",
-        //     title: "Pricing",
-        //     subMenu: [
-        //       {
-        //         icon: "",
-        //         pathname: "/pricing-layout-1",
-        //         title: "Layout 1",
-        //       },
-        //       {
-        //         icon: "",
-        //         pathname: "/pricing-layout-2",
-        //         title: "Layout 2",
-        //       },
-        //     ],
-        //   },
-        //   {
-        //     icon: "",
-        //     title: "Invoice",
-        //     subMenu: [
-        //       {
-        //         icon: "",
-        //         pathname: "/invoice-layout-1",
-        //         title: "Layout 1",
-        //       },
-        //       {
-        //         icon: "",
-        //         pathname: "/invoice-layout-2",
-        //         title: "Layout 2",
-        //       },
-        //     ],
-        //   },
-        //   {
-        //     icon: "",
-        //     title: "FAQ",
-        //     subMenu: [
-        //       {
-        //         icon: "",
-        //         pathname: "/faq-layout-1",
-        //         title: "Layout 1",
-        //       },
-        //       {
-        //         icon: "",
-        //         pathname: "/faq-layout-2",
-        //         title: "Layout 2",
-        //       },
-        //       {
-        //         icon: "",
-        //         pathname: "/faq-layout-3",
-        //         title: "Layout 3",
-        //       },
-        //     ],
-        //   },
-        //   {
-        //     icon: "",
-        //     pathname: "login",
-        //     title: "Login",
-        //   },
-        //   {
-        //     icon: "",
-        //     pathname: "register",
-        //     title: "Register",
-        //   },
-        //   {
-        //     icon: "",
-        //     pathname: "error-page",
-        //     title: "Error Page",
-        //   },
-        //   {
-        //     icon: "",
-        //     pathname: "/update-profile",
-        //     title: "Update profile",
-        //   },
-        //   {
-        //     icon: "",
-        //     pathname: "/change-password",
-        //     title: "Change Password",
-        //   },
-        // ],
-      },
+    
       // "devider",
   //     {
   //       icon: "Inbox",
@@ -470,42 +349,7 @@ const sideMenu = atom({
   //         },
   //       ],
   //     },
-      {
-        icon: "Sidebar",
-        title: "Forms",
-        subMenu: [
-          {
-            icon: "",
-            pathname: "/regular-form",
-            title: "Regular Form",
-          },
-          {
-            icon: "",
-            pathname: "/datepicker",
-            title: "Datepicker",
-          },
-          {
-            icon: "",
-            pathname: "/tom-select",
-            title: "Tom Select",
-          },
-          {
-            icon: "",
-            pathname: "/file-upload",
-            title: "File Upload",
-          },
-          {
-            icon: "",
-            pathname: "/wysiwyg-editor",
-            title: "Wysiwyg Editor",
-          },
-          {
-            icon: "",
-            pathname: "/validation",
-            title: "Validation",
-          },
-        ],
-      },
+  
   //     {
   //       icon: "HardDrive",
   //       title: "Widgets",

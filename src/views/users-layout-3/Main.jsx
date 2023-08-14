@@ -150,19 +150,7 @@ function Main() {
           className="btn btn-primary shadow-md mr-2">
             Add New User
           </button>
-         {/* <div className="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-            <div className="w-56 relative text-slate-500">
-              <input
-                type="text"
-                className="form-control w-56 box pr-10"
-                placeholder="Search..."
-              />
-              <Lucide
-                icon="Search"
-                className="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0"
-              />
-            </div>
-           </div> */}
+         
         </div>
         {/* BEGIN: Users Layout */}
         {users.map((user, userKey) => (

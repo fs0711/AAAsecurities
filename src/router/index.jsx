@@ -73,6 +73,9 @@ import Validation from "../views/validation/Main";
 import Chart from "../views/chart/Main";
 import Slider from "../views/slider/Main";
 import ImageZoom from "../views/image-zoom/Main";
+import ViewSchedule from "../views/users-layout-1/view-schedule";
+import ViewAttendance from "../views/attendance/view-attendance";
+import CreateAttendance from "../views/attendance/create-attendance";
 
 function Router() {
   const routes = [
@@ -96,6 +99,10 @@ function Router() {
         {
           path: "Schedule",
           element: <EmployeeDutyScheduler />,
+        },
+        {
+          path: "view-schedule",
+          element: <ViewSchedule />,
         },
         {
           path: "dashboard-overview-2",
@@ -188,6 +195,14 @@ function Router() {
         {
           path: "users",
           element: <UsersLayout3 />,
+        },
+        {
+          path: "attendance",
+          element: <ViewAttendance />,
+        },
+        {
+          path: "create-attendance",
+          element: <CreateAttendance />,
         },
         {
           path: "profile-overview-1",
