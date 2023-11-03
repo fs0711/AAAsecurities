@@ -30,7 +30,7 @@ function Main() {
   
   useEffect(() => {
     console.log(isAuthenticated);
-    if(isAuthenticated) return navigate('/home');
+    if(isAuthenticated){ return navigate('/home')};
  
 
 

@@ -38,22 +38,25 @@ export const loginUser = (credentials) => async (
         config
       );
     //   console.log(data.data.response_data)
+    if (data.data.response_data.expiry_time > 0) {
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: data.data.response_data
       });
+    }
+      
     } catch (err) {
       console.log(err.message)
-    //   dispatch({
-    //     type: 'LOGIN_FAIL'
-    //   });
+      // dispatch({
+      //   type: 'LOGIN_FAIL'
+      // });
   
-    //   dispatch({
-    //     type: 'GET_ERRORS',
-    //     message: err.response.data,
-    //     id: 'LOGIN_FAIL',
-    //     status: err.response.status
-    //   });
+      // dispatch({
+      //   type: 'GET_ERRORS',
+      //   message: err.response.data,
+      //   id: 'LOGIN_FAIL',
+      //   status: err.response.status
+      // });
     }
 
     
@@ -70,7 +73,7 @@ export const loginUser = (credentials) => async (
     const config = {
             headers: {
               
-               'x-session-key' : token,
+              'x-session-key' : token,
               'x-session-type': type
             }
           };

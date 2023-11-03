@@ -33,7 +33,7 @@ const authReducer = (state = initState, action) => {
 
       case 'LOGOUT_USER':
         localStorage.removeItem('token');
-        // localStorage.removeItem('expirationTime');
+        localStorage.removeItem('expirationTime');
       return {
         ...state,
         isAuthenticated: false,
