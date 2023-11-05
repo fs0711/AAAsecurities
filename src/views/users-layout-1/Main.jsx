@@ -43,7 +43,7 @@ function Main() {
 
       setOptions(selectedUsers);
     
-  }, [dispatch]);
+  }, [dispatch, employees]);
 
   if(!isAuthenticated)
   {

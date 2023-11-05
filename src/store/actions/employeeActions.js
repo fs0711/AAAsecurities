@@ -91,10 +91,11 @@ export const getAllEmployees = () => async (dispatch, getState) => {
       }
       else if(res.data.response_code == 5001)
       {
-        console.log("FAILED CREATE EMPLOYEE")
-        dispatch({
-          type: 'USER_AUTH_FAIL',
-        }); 
+        // console.log("FAILED CREATE EMPLOYEE")
+        // dispatch({
+        //   type: 'USER_AUTH_FAIL',
+        // }); 
+        alert(res.data.response_message);
         
       }
       else

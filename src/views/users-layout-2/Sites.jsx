@@ -43,7 +43,7 @@ function Sites() {
 
     console.log (clients)
 
-  }, [dispatch]);
+  }, [dispatch, sites]);
 
 // Define state variables
 const [siteName, setSiteName] = useState('');

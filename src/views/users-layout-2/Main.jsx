@@ -32,16 +32,16 @@ function Main() {
 
   if(!isAuthenticated)
   {
-    return navigate('/');
+    return navigate('/home');
   }
   
   useEffect(() => {
 
     dispatch(getAllCLients());
 
-    console.log (clients)
+    console.log(clients)
 
-  }, [dispatch]);
+  }, [dispatch, clients]);
 
 // Define state variables
 const [clientName, setClientName] = useState("");
@@ -68,8 +68,6 @@ const handleSubmit = (event) => {
   setZipCode('');
   setCpEmail('');
   setNumberOfSites(0);
-  
-
 };
 
   return (
@@ -204,6 +202,7 @@ const handleSubmit = (event) => {
                               placeholder="Client Name"
                               value={clientName}
                               onChange={(e) => setClientName(e.target.value)}
+                              required
                             />
                           </div>
                           <div className="col-span-12 sm:col-span-6">
@@ -217,6 +216,7 @@ const handleSubmit = (event) => {
                               placeholder="Contact Person"
                               value={contactPerson}
                               onChange={(e) => setContactPerson(e.target.value)}
+                              required
                             />
                           </div>
                           <div className="col-span-12 sm:col-span-6">
@@ -230,6 +230,7 @@ const handleSubmit = (event) => {
                               placeholder="+923xxxxxxxxx"
                               value={cpNumber}
                               onChange={(e) => setCpNumber([e.target.value])}
+                              required
                             />
                           </div>
                           <div className="col-span-12 sm:col-span-6">
@@ -243,6 +244,7 @@ const handleSubmit = (event) => {
                               placeholder="Address"
                               value={address}
                               onChange={(e) => setAddress(e.target.value)}
+                              required
                             />
                           </div>
                           <div className="col-span-12 sm:col-span-6">
@@ -256,6 +258,7 @@ const handleSubmit = (event) => {
                               placeholder="City"
                               value={city}
                               onChange={(e) => setCity(e.target.value)}
+                              required
                             />
                           </div>
                           <div className="col-span-12 sm:col-span-6">
@@ -269,6 +272,7 @@ const handleSubmit = (event) => {
                               placeholder="Country"
                               value={country}
                               onChange={(e) => setCountry(e.target.value)}
+                              required
                             />
                           </div>
                           <div className="col-span-12 sm:col-span-6">
@@ -282,6 +286,7 @@ const handleSubmit = (event) => {
                               placeholder="Zip Code"
                               value={zipCode}
                               onChange={(e) => setZipCode(e.target.value)}
+                              required
                             />
                           </div>
                           <div className="col-span-12 sm:col-span-6">
@@ -295,6 +300,7 @@ const handleSubmit = (event) => {
                               placeholder="CP Email"
                               value={cpEmail}
                               onChange={(e) => setCpEmail(e.target.value)}
+                              required
                             />
                           </div>
                           <div className="col-span-12 sm:col-span-6">
@@ -308,6 +314,7 @@ const handleSubmit = (event) => {
                               placeholder="No. of Sites"
                               value={numberOfSites}
                               onChange={(e) => setNumberOfSites(parseInt(e.target.value))}
+                              required
                             />
                           </div>
                             </ModalBody>

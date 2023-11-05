@@ -69,9 +69,10 @@ export const getAllSites = () => async (dispatch, getState) => {
       }
       else 
       {
-        dispatch({
-          type: 'USER_AUTH_FAIL',
-        }); 
+        // dispatch({
+        //   type: 'USER_AUTH_FAIL',
+        // });
+        alert(res.data.response_message);
       }
      
     } catch (err) {
