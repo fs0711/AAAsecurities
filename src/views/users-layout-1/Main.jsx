@@ -134,67 +134,87 @@ const handleClick = (e) => {
            </div> */}
         </div>
         {/* BEGIN: Users Layout */}
-        {employees.map((employee, employeeKey) => (
-          
-          <div
-            key={employeeKey}
-            className="intro-y col-span-12 md:col-span-6 lg:col-span-4"
-          >
-            <div className="box">
-              <div className="flex items-start px-5 pt-5">
-                <div className="w-full flex flex-col lg:flex-row items-center">
+        <div className="w-auto">
+            <table className="table">
+                <thead className="bg-primary text-white">
+                    <tr>
+                        <th className="whitespace-nowrap">ID</th>
+                        <th className="whitespace-nowrap">Name</th>
+                        <th className="whitespace-nowrap">Email</th>
+                        <th className="whitespace-nowrap">Phone</th>
+                    </tr>
+                </thead>
+                {employees.map((employee, employeeKey) => (
+                <tbody key={employeeKey}>
+                    <tr>
+                        <td>{employee.employee_id}</td>
+                        <td>{employee.name}</td>
+                        <td>{employee.email_address}</td>
+                        <td>{employee.phone_number}</td>
+                    </tr>
+                </tbody>
+                ))}
+            </table>
+        </div>
+{/*         
+          // <div
+          //   key={employeeKey}
+          //   className="intro-y col-span-12 md:col-span-6 lg:col-span-4"
+          // >
+          //   <div className="box">
+          //     <div className="flex items-start px-5 pt-5">
+          //       <div className="w-full flex flex-col lg:flex-row items-center">
                  
-                  <div className="lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">
-                    <a href="" className="font-medium">
-                      {employee.name}
-                    </a>
-                    <div className="text-slate-500 text-xs mt-0.5">
-                      {employee.employee_id}
-                    </div>
-                  </div>
-                </div>
-                <Dropdown className="absolute right-0 top-0 mr-5 mt-3">
-                  <DropdownToggle tag="a" className="w-5 h-5 block" href="#">
-                    <Lucide
-                      icon="MoreHorizontal"
-                      className="w-5 h-5 text-slate-500"
-                    />
-                  </DropdownToggle>
-                  <DropdownMenu className="w-40">
-                    <DropdownContent>
-                      <DropdownItem>
-                        <Lucide icon="Edit2" className="w-4 h-4 mr-2" /> Edit
-                      </DropdownItem>
-                      <DropdownItem>
-                        <Lucide icon="Trash" className="w-4 h-4 mr-2" /> Delete
-                      </DropdownItem>
-                    </DropdownContent>
-                  </DropdownMenu>
-                </Dropdown>
-              </div>
-              <div className="text-center lg:text-left p-5">
-                <div></div>
-                <div className="flex items-center justify-center lg:justify-start text-slate-500 mt-5">
-                  <Lucide icon="Mail" className="w-3 h-3 mr-2" />
-                  {employee.email_address
-                  }
-                </div>
-                <div className="flex items-center justify-center lg:justify-start text-slate-500 mt-1">
-                  <Lucide icon="CreditCard" className="w-3 h-3 mr-2" />
-                  {employee.phone_number}
-                </div>
-              </div>
-              {/*<div className="text-center lg:text-right p-5 border-t border-slate-200/60 dark:border-darkmode-400">
-                <button className="btn btn-primary py-1 px-2 mr-2">
-                  Message
-                </button>
-                <button className="btn btn-outline-secondary py-1 px-2">
-                  Profile
-                </button>
-                </div> */}
-            </div>
-          </div>
-        ))}
+          //         <div className="lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">
+          //           <a href="" className="font-medium">
+          //             {employee.name}
+          //           </a>
+          //           <div className="text-slate-500 text-xs mt-0.5">
+          //             {employee.employee_id}
+          //           </div>
+          //         </div>
+          //       </div>
+          //       <Dropdown className="absolute right-0 top-0 mr-5 mt-3">
+          //         <DropdownToggle tag="a" className="w-5 h-5 block" href="#">
+          //           <Lucide
+          //             icon="MoreHorizontal"
+          //             className="w-5 h-5 text-slate-500"
+          //           />
+          //         </DropdownToggle>
+          //         <DropdownMenu className="w-40">
+          //           <DropdownContent>
+          //             <DropdownItem>
+          //               <Lucide icon="Edit2" className="w-4 h-4 mr-2" /> Edit
+          //             </DropdownItem>
+          //             <DropdownItem>
+          //               <Lucide icon="Trash" className="w-4 h-4 mr-2" /> Delete
+          //             </DropdownItem>
+          //           </DropdownContent>
+          //         </DropdownMenu>
+          //       </Dropdown>
+          //     </div>
+          //     <div className="text-center lg:text-left p-5">
+          //       <div></div>
+          //       <div className="flex items-center justify-center lg:justify-start text-slate-500 mt-5">
+          //         <Lucide icon="Mail" className="w-3 h-3 mr-2" />
+          //         {employee.email_address}
+          //       </div>
+          //       <div className="flex items-center justify-center lg:justify-start text-slate-500 mt-1">
+          //         <Lucide icon="CreditCard" className="w-3 h-3 mr-2" />
+          //         {employee.phone_number}
+          //       </div>
+          //     </div>
+          //     {/*<div className="text-center lg:text-right p-5 border-t border-slate-200/60 dark:border-darkmode-400">
+          //       <button className="btn btn-primary py-1 px-2 mr-2">
+          //         Message
+          //       </button>
+          //       <button className="btn btn-outline-secondary py-1 px-2">
+          //         Profile
+          //       </button>
+          //       </div>
+          //   </div>
+          // </div> */}
+        
         {/* END: Users Layout */}
           {/* BEGIN: Header & Footer Modal */}
           <PreviewComponent>
