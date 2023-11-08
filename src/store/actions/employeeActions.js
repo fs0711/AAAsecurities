@@ -21,12 +21,12 @@ export const getAllEmployees = () => async (dispatch, getState) => {
           payload:data.data.response_data
         });
       }
-      // else 
-      // {
-      //   dispatch({
-      //     type: 'USER_AUTH_FAIL',
-      //   }); 
-      // }
+      else 
+      {
+        dispatch({
+          type: 'USER_AUTH_FAIL',
+        }); 
+      }
      
     } catch (err) {
       console.log(err);
